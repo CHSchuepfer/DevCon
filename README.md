@@ -30,7 +30,8 @@ So even if i dont have access to my workstation all i need is to be able to ssh 
 
 <a id="First-time-setup"></a>
 ### First time setup
-- Clone the repo
+- Fork this Repo
+- Clone your new repo
 - Copy the `example.env` to `.env`
 - Copy the `example.docker-compose.yml` to `docker-compose.yml`
 - Edit the `.env` file to your needs (especially important the username and password)
