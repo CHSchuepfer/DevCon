@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  dvc1:
+    image: ${IMAGE_NAME}:${IMAGE_TAG} 
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - devcon_home:/home/devcon/:rw
+      - /var/run/docker.sock:/var/run/docker.sock
+
+
+volumes:
+  devcon_home:
