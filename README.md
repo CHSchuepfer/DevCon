@@ -12,7 +12,7 @@
 - My most critical tools in a docker container that i can run anywhere
 
 ### The long story
-Im often times in a situation where i need to have my workstation or my most crucial Tools operational.
+I need to have my workstation or my most crucial Tools operational and didnt want to run into problems bc. some update on my laptop screwed something up.
 So the basic concept of `devcon` comes from the `devcontainer` Project (hence the name).
 
 I wanted to always be able to have a working environment that is consistent and reproducible.
