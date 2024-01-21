@@ -1,7 +1,5 @@
 # devcon
 
-//Generate a Table of contents via https://ecotrust-canada.github.io/markdown-toc/
-
 
 ## Known Probelems
 - Currently the `docker` command doesnt work withouth `sudo` inside the container
