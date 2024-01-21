@@ -83,5 +83,6 @@ command: "passwd $USER_NAME your-personal-password-here"
 
 ## Links
 
-### My favorite NVIM Distro
+### Mentioned in this File
+#### NeoVim Distro
 - https://www.lazyvim.org/
