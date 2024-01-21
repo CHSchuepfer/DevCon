@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd build
 
 # Check if the .env file exists
 if [ ! -f .env ]; then
