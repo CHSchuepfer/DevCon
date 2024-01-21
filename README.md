@@ -71,11 +71,17 @@ The reason is that many antivirus scanner dont like to have dumped thousands of 
 I tried it in the beginning and the perfomance impact on my laptop was huge.
 So i chose the `docker volume` approach. Given the fact that multiple Container can use the same volume this is a good approach for me.
 That also means however that you have to install software that resides in the user directory manually once.
-An example would be `LazyVim` or my `.ssh` config.
+An example would be [`LazyVim`](https://www.lazyvim.org/) or my `.ssh` config.
 
 ### About the username and password
 If you choose to use the `.env` file for your username and password declaration like i described above (in the [First-time-setup](#First-time-setup) ) you should be aware that you dont want to push that image to a public registry.
-If you want your image to be public then you should set the ENV VAR `USER_PASSWORD` to something generic and later add the following to your `docker-compose.yml` in the `command:` seciton
+If you want your image to be public then you should set the ENV VAR `USER_PASSWORD` to something generic and later add the following to your `docker-compose.yml` in the `command:` section:
 ```yaml
 command: "passwd $USER_NAME your-personal-password-here"
 ```
+
+
+## Links
+
+### My favorite NVIM Distro
+- https://www.lazyvim.org/
