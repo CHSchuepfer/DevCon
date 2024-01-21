@@ -84,8 +84,8 @@ source $ZSH/oh-my-zsh.sh
 
 alias cd..="cd .."
 alias ll="lsd -l" 
-alias rep="cd ~/_repo"
-alias repo="cd ~/_repo"
+alias rep="cd /workspace/repo"
+alias repo="cd /workspace/repo"
 alias dol="cd ~/Downloads"
 alias dl="cd ~/Downloads"
 alias src="source ~/.zshrc"
@@ -93,15 +93,14 @@ alias dup="docker-compose up -d"
 alias down="docker-compose down"
 alias dps="docker ps -a"
 alias n="nvim"
-alias dll="lsd -l"
 alias cls="clear"
 alias jj="fg"
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit"
 alias nn="nvim"
-alias hx="helix"
 alias cat="batcat"
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
