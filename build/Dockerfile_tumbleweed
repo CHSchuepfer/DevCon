@@ -8,6 +8,7 @@ ENV USER_PASSWORD=$USER_PASSWORD
 ENV LocalSetup=en_EN.UTF-8
 # install the tooks i wish to use
 RUN TZ=Europe/Berlin
+RUN groupadd sudo
 RUN zypper clean -a && \
   zypper up && \
   zypper in -y sudo \
@@ -45,9 +46,10 @@ RUN zypper clean -a && \
   # add a user (--disabled-password: the user won't be able to use the account until the password is set)
   && useradd --shell /bin/zsh --home-dir /home/$USER_NAME $USER_NAME > /dev/null 2>&1 \ 
   # update the password
-  && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd && usermod -aG wheel $USER_NAME
+  && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd && usermod -aG sudo $USER_NAME \
+  && echo '%sudo  ALL=(ALL:ALL) ALL' >> /etc/sudoers
 # Add Docker’s official GPG key
-RUN groupadd docker
+# RUN groupadd docker
 RUN usermod -aG sudo,docker $USER_NAME
 # Add an entrypoint script
 COPY entrypoint.sh /run/entrypoint.sh
@@ -57,12 +59,12 @@ USER $USER_NAME
 ENV TERM xterm
 # set the zsh theme
 ENV ZSH_THEME agnoster
-RUN cargo install lsd && \
-cargo install bob-nvim && \
-bob install latest && \
-bob use latest
-# run the installation script  
-ENV PATH="${PATH}:/home/$USER_NAME/.local/share/bob/nvim-bin"
+# RUN cargo install lsd && \
+# cargo install bob-nvim && \
+# bob install latest && \
+# bob use latest
+# # run the installation script  
+# ENV PATH="${PATH}:/home/$USER_NAME/.local/share/bob/nvim-bin"
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 RUN export PATH=$PATH:/home/$USER_NAME/go/bin
