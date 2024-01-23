@@ -1,0 +1,72 @@
+FROM opensuse/tumbleweed:latest
+
+# Set environment variables from the .env file
+ARG USER_NAME=default_username
+ARG USER_PASSWORD=default_password
+ENV USER_NAME=$USER_NAME
+ENV USER_PASSWORD=$USER_PASSWORD
+ENV LocalSetup=en_EN.UTF-8
+# install the tooks i wish to use
+RUN TZ=Europe/Berlin
+RUN zypper clean -a && \
+  zypper up && \
+  zypper in -y sudo \
+  curl \
+  git-core \
+  gnupg \
+  nodejs20 \
+  zsh \
+  wget \
+  nano \
+  npm20 \
+  bat \
+  tmux \
+  tmux-powerline \
+  htop \ 
+  python310 \
+  python310-pip \
+  python310-pylint-venv \
+  python310-flake8 \
+  go1.22 \
+  go1.22-doc \
+  go1.22-libstd \
+  ripgrep \
+  ripgrep-zsh-completion \
+  powerline-fonts \
+  lazygit \
+  docker \
+  docker-buildx \
+  docker-compose \
+  docker-bash-completion \
+  docker-zsh-completion \
+  rust \
+  neovim \
+  lsd \
+  # add a user (--disabled-password: the user won't be able to use the account until the password is set)
+  && useradd --shell /bin/zsh --home-dir /home/$USER_NAME $USER_NAME > /dev/null 2>&1 \ 
+  # update the password
+  && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd && usermod -aG wheel $USER_NAME
+# Add Docker’s official GPG key
+RUN groupadd docker
+RUN usermod -aG sudo,docker $USER_NAME
+# Add an entrypoint script
+COPY entrypoint.sh /run/entrypoint.sh
+RUN chmod +x /run/entrypoint.sh
+
+USER $USER_NAME
+ENV TERM xterm
+# set the zsh theme
+ENV ZSH_THEME agnoster
+RUN cargo install lsd && \
+cargo install bob-nvim && \
+bob install latest && \
+bob use latest
+# run the installation script  
+ENV PATH="${PATH}:/home/$USER_NAME/.local/share/bob/nvim-bin"
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+RUN export PATH=$PATH:/home/$USER_NAME/go/bin
+#  Set the entrypoint script
+ENTRYPOINT ["/run/entrypoint.sh"] 
+
+CMD ["zsh"]
