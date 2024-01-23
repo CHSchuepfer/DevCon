@@ -13,7 +13,7 @@
 
 ### The long story
 I need to have my workstation or my most crucial Tools operational and didnt want to run into problems because some update on my laptop screwed something up.
-So the basic concept of `devcon` comes from the `devcontainer` Project (hence the name).
+So the basic concept of `devcon` comes from the `devcontainer` Project (hence the name) but on a more permanent basis.
 
 I wanted to always be able to have a working environment that is consistent and reproducible.
 I also work in an environment that is highly controlled so im not able to freely install software on my workstation.
@@ -83,5 +83,6 @@ command: "passwd $USER_NAME your-personal-password-here"
 
 ## Links
 
-### My favorite NVIM Distro
+### Mentioned in this File
+#### NeoVim Distro
 - https://www.lazyvim.org/
