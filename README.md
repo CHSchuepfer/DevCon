@@ -1,4 +1,4 @@
-# DevCon-1
+# DevCon
 
 
 ## Known Probelems
