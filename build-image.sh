@@ -46,8 +46,6 @@ process_dockerfile() {
     echo "Processing $1..."
 
     file_name="$1"
-    # echo "CWD: $PWD"
-    # cd $PWD/build
     trimmed_image_name="${IMAGE_NAME#\{}" 
     trimmed_image_name="${trimmed_image_name%\}}"
     echo "Trimmed Image: $trimmed_image_name"
