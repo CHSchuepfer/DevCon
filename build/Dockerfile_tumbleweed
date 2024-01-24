@@ -52,6 +52,7 @@ RUN zypper clean -a && \
 # Add Docker’s official GPG key
 # RUN groupadd docker
 RUN usermod -aG sudo,docker $USER_NAME
+RUN chsh -s $(which zsh)
 # Add an entrypoint script
 COPY entrypoint.sh /run/entrypoint.sh
 RUN chmod +x /run/entrypoint.sh
