@@ -35,6 +35,7 @@ RUN zypper clean -a && \
   ripgrep-zsh-completion \
   powerline-fonts \
   lazygit \
+  openssh \
   docker \
   docker-buildx \
   docker-compose \
