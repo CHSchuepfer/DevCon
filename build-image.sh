@@ -40,6 +40,17 @@ echo "'all') All files"
 # Ask the user to choose a Dockerfile
 read -p "Enter your choice: " choice
 
+
+
+echo "Export images after creation?"
+echo "Y(es)"
+echo "N(o)"
+
+read -p "Enter your choice: " exporter
+
+
+exporter=${exporter^^}
+
 # Function to process Dockerfile
 process_dockerfile() {
     
@@ -61,6 +72,13 @@ process_dockerfile() {
     # Check if the build was successful
     if [ $? -eq 0 ]; then
       echo "Docker image build successful."
+      if [ $exporter = "Y" ]; then
+          echo "Beginning export of Image"
+      docker image save $conc_img_name:$IMAGE_TAG \
+          -o $conc_img_name-$IMAGE_TAG.tar
+      else
+          echo "Export Function not selected"
+      fi
     else
       echo "Error: Docker image build failed."
     fi
