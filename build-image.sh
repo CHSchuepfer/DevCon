@@ -74,8 +74,9 @@ process_dockerfile() {
       echo "Docker image build successful."
       if [ $exporter = "Y" ]; then
           echo "Beginning export of Image"
-      docker image save $conc_img_name:$IMAGE_TAG \
-          -o $conc_img_name-$IMAGE_TAG.tar
+          mkdir -p ../exports
+          docker image save $conc_img_name:$IMAGE_TAG \
+              -o ../exports/$conc_img_name-$IMAGE_TAG.tar
       else
           echo "Export Function not selected"
       fi
