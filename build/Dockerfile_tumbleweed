@@ -10,7 +10,7 @@ ENV LocalSetup=en_EN.UTF-8
 RUN TZ=Europe/Berlin
 RUN groupadd sudo
 RUN zypper clean -a && \
-  zypper up && \
+  zypper up -y && \
   zypper in -y sudo \
   curl \
   git-core \
