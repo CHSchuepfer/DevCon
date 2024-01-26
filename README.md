@@ -36,7 +36,7 @@ So even if i dont have access to my workstation all i need is to be able to ssh 
 - Clone your new repo
 - Copy the `example.env` to `.env`
 - Copy the `example.docker-compose.yml` to `docker-compose.yml`
-- Edit the `.env` file to your needs (especially important the username and password)
+- Edit the `.env` file to your needs (especially important the username, password and hostname)
   - The `.gitignore` is configured to ignore `.env` files
 - Edit the `Dockerfile` to your needs
   - It is based on the latest ubuntu LTS Image
