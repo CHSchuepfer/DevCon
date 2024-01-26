@@ -74,7 +74,14 @@ process_dockerfile() {
       echo "Docker image build successful."
       if [ $exporter = "Y" ]; then
           echo "Beginning export of Image"
-          mkdir -p ../exports
+          if [ -d "$directory" ]; then
+            echo "Export Directory exists."
+            echo "Skipping creation"
+        else
+            echo "Export Directory does not exist."
+            echo "Creating...."
+            mkdir -p ../exports
+        fi
           docker image save $conc_img_name:$IMAGE_TAG \
               -o ../exports/$conc_img_name-$IMAGE_TAG.tar
       else
