@@ -27,6 +27,8 @@ So even if i dont have access to my workstation all i need is to be able to ssh 
 ### General Notice
 - I would recommend that you fork this repo, set i to private and use it as a base for your own image.
 - You can then from time to time sync your fork with this repo to get updates.
+  - Beware of Merge Conflicts!
+
 
 <a id="First-time-setup"></a>
 ### First time setup
