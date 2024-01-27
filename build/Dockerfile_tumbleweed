@@ -3,7 +3,6 @@ FROM opensuse/tumbleweed:latest
 # Set environment variables from the .env file
 ARG USER_NAME=default_username
 ARG USER_PASSWORD=default_password
-ARG HOST_NAME=defaultHOST
 
 ENV USER_NAME=$USER_NAME
 ENV USER_PASSWORD=$USER_PASSWORD
