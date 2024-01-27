@@ -7,7 +7,6 @@ ARG HOST_NAME=defaultHOST
 
 ENV USER_NAME=$USER_NAME
 ENV USER_PASSWORD=$USER_PASSWORD
-ENV HOST_NAME=$HOST_NAME
 
 ENV LocalSetup=en_EN.UTF-8
 
@@ -54,7 +53,6 @@ RUN zypper clean -a && \
   # update the password
   && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd && usermod -aG sudo $USER_NAME \
   && echo '%sudo  ALL=(ALL:ALL) ALL' >> /etc/sudoers
-RUN hostnameclt hostname $HOST_NAME
 # Add Docker’s official GPG key
 # RUN groupadd docker
 RUN usermod -aG sudo,docker $USER_NAME
