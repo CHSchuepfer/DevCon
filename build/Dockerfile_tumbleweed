@@ -13,6 +13,8 @@ ENV LocalSetup=en_EN.UTF-8
 RUN TZ=Europe/Berlin
 RUN groupadd sudo
 RUN zypper clean -a && \
+    zypper install -y -t pattern devel_basis 
+RUN zypper clean -a && \
   zypper up -y && \
   zypper in -y sudo \
   curl \
