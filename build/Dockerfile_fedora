@@ -1,0 +1,47 @@
+FROM fedora:latest
+
+# Set environment variables from the .env file
+ARG USER_NAME=default_username
+ARG USER_PASSWORD=default_password
+ENV USER_NAME=$USER_NAME
+ENV USER_PASSWORD=$USER_PASSWORD
+ENV LocalSetup=en_US.UTF-8
+RUN TZ=Europe/Berlin
+# Setup DNF to not be slow AF
+RUN echo "fastestmirror=True" >> /etc/dnf/dnf.conf && echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf
+# Install all packages & cleanup afterwards
+RUN dnf install -y sudo glibc-locale-source glibc-all-langpacks tzdata curl git-core \
+gnupg1 gnupg2 nodejs zsh wget nano npm bat tmux htop python3.10 python-flake8 \
+golang xclip ripgrep powerline-fonts libaio lsd fzf neovim \
+&& dnf install -y 'dnf-command(copr)' && dnf copr enable atim/lazygit -y \
+&& dnf install -y lazygit dnf-plugins-core \
+&& dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo \
+&& dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
+&& dnf autoremove
+
+# set up locale
+RUN /bin/sh -c ' \
+    LANG=${LocalSetup%.*}; \
+    ENCODING=${LocalSetup#*.}; \
+    localedef -i $LANG -f $ENCODING $LocalSetup \
+'
+# User Setup
+RUN adduser --shell /bin/zsh --home /home/$USER_NAME $USER_NAME \
+  # update the password
+  && echo "${USER_NAME}:${USER_PASSWORD}" | chpasswd && usermod -aG wheel $USER_NAME
+RUN echo "devcon ALL=(ALL:ALL) ALL" >> /etc/sudoers
+# RUN groupadd docker
+RUN usermod -aG docker $USER_NAME
+# Add an entrypoint script
+COPY entrypoint.sh /run/entrypoint.sh
+RUN chmod +x /run/entrypoint.sh
+
+USER $USER_NAME
+ENV TERM xterm-256color
+# set the zsh theme
+ENV ZSH_THEME agnoster
+
+#  Set the entrypoint script
+ENTRYPOINT ["/run/entrypoint.sh"] 
+
+CMD ["zsh"]
