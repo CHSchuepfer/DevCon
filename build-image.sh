@@ -14,7 +14,7 @@ USER_NAME=$(grep USER_NAME .env | cut -d '=' -f2)
 USER_PASSWORD=$(grep USER_PASSWORD .env | cut -d '=' -f2)
 IMAGE_NAME=$(grep IMAGE_NAME .env | cut -d '=' -f2)
 IMAGE_TAG=$(grep IMAGE_TAG .env | cut -d '=' -f2)
-
+TARGET_PLATFORM=$(grep TARGET_PLATFORM .env | cut -d '=' -f2)
 cd build
 # Check if USER_NAME and USER_PASSWORD are not empty
 if [ -z "$USER_NAME" ] || [ -z "$USER_PASSWORD" ]; then
@@ -64,7 +64,7 @@ process_dockerfile() {
     echo "suffix: $suffix"
     conc_img_name="${trimmed_image_name}_${suffix}"
     # Build the Docker image with build arguments
-    docker buildx build --platform linux/amd64 -t $conc_img_name:$IMAGE_TAG \
+    docker buildx build --platform $TARGET_PLATFORM -t $conc_img_name:$IMAGE_TAG \
       -f $1 \
       --build-arg USER_NAME="$USER_NAME" \
       --build-arg USER_PASSWORD="$USER_PASSWORD" \
