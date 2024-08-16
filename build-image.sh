@@ -64,7 +64,7 @@ process_dockerfile() {
     echo "suffix: $suffix"
     conc_img_name="${trimmed_image_name}_${suffix}"
     # Build the Docker image with build arguments
-    docker build -t $conc_img_name:$IMAGE_TAG \
+    docker buildx build --platform linux/amd64 -t $conc_img_name:$IMAGE_TAG \
       -f $1 \
       --build-arg USER_NAME="$USER_NAME" \
       --build-arg USER_PASSWORD="$USER_PASSWORD" \
